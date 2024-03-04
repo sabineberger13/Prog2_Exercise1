@@ -41,6 +41,36 @@ public class Movie {
                 "A Star is born",
                 "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
                 Arrays.asList(Genre.COMEDY, Genre.FAMILY, Genre.ANIMATION)));
+        movies.add(new Movie(
+                "The Shawshank Redemption",
+                "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                Arrays.asList(Genre.DRAMA)
+        ));
+
+        movies.add(new Movie(
+                "The Dark Knight",
+                "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+                Arrays.asList(Genre.ACTION, Genre.CRIME, Genre.DRAMA)
+        ));
+
+        movies.add(new Movie(
+                "Pulp Fiction",
+                "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+                Arrays.asList(Genre.CRIME, Genre.DRAMA)
+        ));
+
+        movies.add(new Movie(
+                "Inception",
+                "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+                Arrays.asList(Genre.ACTION, Genre.ADVENTURE)
+        ));
+
+        movies.add(new Movie(
+                "The Matrix",
+                "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+                Arrays.asList(Genre.ACTION)
+        ));
+
 
         return movies;
     }

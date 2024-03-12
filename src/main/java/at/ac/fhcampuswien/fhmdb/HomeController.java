@@ -18,7 +18,6 @@ import java.util.*;
 import java.net.URL;
 import java.util.stream.Collectors;
 
-
 public class HomeController implements Initializable {
     @FXML
     public JFXButton searchBtn;

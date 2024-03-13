@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -66,8 +67,6 @@ public class HomeController implements Initializable {
 
 
         // TODO add event handlers to buttons and call the regarding methods
-
-        // TODO add event handlers to buttons and call the regarding methods
         // EventHandler für den Suchbutton
         searchBtn.setOnAction(actionEvent -> filterMovies());
         genreComboBox.setOnAction(actionEvent -> filterMovies());
@@ -87,25 +86,7 @@ public class HomeController implements Initializable {
         };
 
 
-        // EventHandler für den Suchbutton
-        searchBtn.setOnAction(actionEvent -> filterMovies());
-        genreComboBox.setOnAction(actionEvent -> filterMovies());
-        sortBtn.setOnAction(actionEvent -> sortMovies());
-
-        {
-            String searchText = searchField.getText().toLowerCase().trim();
-
-            List<Movie> filteredMovies = allMovies.stream()
-                    .filter(movie -> movie.getTitle().toLowerCase().contains(searchText))
-                    .collect(Collectors.toList());
-
-            observableMovies.setAll(filteredMovies);
-            movieListView.refresh();
-
-
-        };
-
-        // Sort button example funktoniert noch nicht ganz:
+        /* Sort button example funktoniert noch nicht ganz:
         sortBtn.setOnAction(actionEvent ->
         {
             String searchText = searchField.getText().toLowerCase().trim();
@@ -124,7 +105,7 @@ public class HomeController implements Initializable {
             }
 
             movieListView.refresh();
-        });
+        });*/
     }
 
     private void filterMovies() {
@@ -140,5 +121,10 @@ public class HomeController implements Initializable {
     public void sortMovies() {
         observableMovies.sort(Comparator.comparing(Movie::getTitle));
         sortedState = SortedState.ASCENDING;
+    }
+
+    public void searchBtnClicked(ActionEvent actionEvent) {
+
+        sortMovies();
     }
 }

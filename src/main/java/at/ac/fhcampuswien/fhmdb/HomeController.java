@@ -9,9 +9,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.*;
@@ -39,18 +40,24 @@ public class HomeController implements Initializable {
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     public SortedState sortedState = SortedState.NONE;
+    private static int sortClicks = 0;
+    //private ObservableList<Movie> filteredMovies = FXCollections.observableArrayList();
 
+    @FXML
+    public Label sortingStatement;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        observableMovies.addAll(allMovies);         // add dummy data to obsegrvable list
+        observableMovies.addAll(allMovies);
+
+// add dummy data to obsegrvable list
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
-       // genreComboBox.getItems().addAll(Genre.values());
+        genreComboBox.getItems().addAll(Genre.values());
         genreComboBox.setPromptText("Filter by Genre");
 
         genreComboBox.getItems().addAll("ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY", "CRIME",
@@ -59,6 +66,27 @@ public class HomeController implements Initializable {
 
 
         // TODO add event handlers to buttons and call the regarding methods
+
+        // TODO add event handlers to buttons and call the regarding methods
+        // EventHandler für den Suchbutton
+        searchBtn.setOnAction(actionEvent -> filterMovies());
+        genreComboBox.setOnAction(actionEvent -> filterMovies());
+        sortBtn.setOnAction(actionEvent -> sortMovies());
+
+        {
+            String searchText = searchField.getText().toLowerCase().trim();
+
+            List<Movie> filteredMovies = allMovies.stream()
+                    .filter(movie -> movie.getTitle().toLowerCase().contains(searchText))
+                    .collect(Collectors.toList());
+
+            observableMovies.setAll(filteredMovies);
+            movieListView.refresh();
+
+
+        };
+
+
         // EventHandler für den Suchbutton
         searchBtn.setOnAction(actionEvent -> filterMovies());
         genreComboBox.setOnAction(actionEvent -> filterMovies());
@@ -101,6 +129,13 @@ public class HomeController implements Initializable {
 
     private void filterMovies() {
     }
+
+
+    public void initializeState() {
+        observableMovies.clear();
+        observableMovies.addAll(allMovies);
+    }
+
 
     public void sortMovies() {
         observableMovies.sort(Comparator.comparing(Movie::getTitle));
